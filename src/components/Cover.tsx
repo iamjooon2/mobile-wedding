@@ -71,17 +71,17 @@ export default function Cover() {
           {/* Ink drop */}
           <defs>
             <radialGradient id="inkGrad">
-              <stop offset="0%" stopColor="#3a8b26" stopOpacity="1" />
-              <stop offset="35%" stopColor="#4ca632" stopOpacity="0.6" />
-              <stop offset="70%" stopColor="#6abf4e" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#8fd47a" stopOpacity="0" />
+              <stop offset="0%" stopColor="#0A6B2A" stopOpacity="1" />
+              <stop offset="35%" stopColor="#0F8C38" stopOpacity="0.6" />
+              <stop offset="70%" stopColor="#18AD4A" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#30CC65" stopOpacity="0" />
             </radialGradient>
             <filter id="inkBlur">
               <feGaussianBlur stdDeviation="3" />
             </filter>
           </defs>
           <motion.circle
-            cx="100" cy="200" r="80"
+            cx="100" cy="200" r="100"
             fill="url(#inkGrad)"
             filter="url(#inkBlur)"
             style={{
