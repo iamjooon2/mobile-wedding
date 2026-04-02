@@ -52,7 +52,7 @@ export default function Share() {
       content: {
         title: `${groom.name} & ${bride.name} 결혼합니다`,
         description: `${wedding.dateDisplay}\n${wedding.venue}`,
-        imageUrl: `${shareUrl}thumbnail.jpeg`,
+        imageUrl: `${shareUrl}thumbnail.png`,
         link: {
           mobileWebUrl: shareUrl,
           webUrl: shareUrl,
@@ -60,7 +60,7 @@ export default function Share() {
       },
       buttons: [
         {
-          title: '청첩장 보기',
+          title: '축하하러가기',
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,
