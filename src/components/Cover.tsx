@@ -33,13 +33,13 @@ export default function Cover() {
     if (p <= 0.25) return 0;
     if (p <= 0.32) return (p - 0.25) / 0.07;
     if (p <= 0.55) return 1;
-    if (p >= 0.62) return 0;
-    return 1 - (p - 0.55) / 0.07;
+    if (p >= 0.65) return 0;
+    return 1 - (p - 0.55) / 0.10;
   });
 
   const brideOpacity = useTransform(scrollYProgress, (p: number) => {
-    if (p <= 0.62) return 0;
-    if (p <= 0.69) return (p - 0.62) / 0.07;
+    if (p <= 0.55) return 0;
+    if (p <= 0.65) return (p - 0.55) / 0.10;
     return 1;
   });
 

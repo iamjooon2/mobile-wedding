@@ -196,9 +196,8 @@
   background: rgba(255, 255, 255, 0.6);
   z-index: 10;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 80px;
 }
 
 .hero__dim-bottom {
