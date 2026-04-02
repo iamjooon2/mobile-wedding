@@ -29,7 +29,7 @@ export default function Share() {
       Kakao?: {
         isInitialized: () => boolean;
         init: (key: string) => void;
-        Share: { sendScrap: (options: unknown) => void };
+        Share: { sendDefault: (options: unknown) => void };
       };
     };
 
@@ -45,8 +45,28 @@ export default function Share() {
       return;
     }
 
-    Kakao.Share.sendScrap({
-      requestUrl: 'https://hd2908.github.io/mobile-wedding/',
+    const shareUrl = 'https://hd2908.github.io/mobile-wedding/';
+
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: `${groom.name} & ${bride.name} 결혼합니다`,
+        description: `${wedding.dateDisplay}\n${wedding.venue}`,
+        imageUrl: `${shareUrl}boy.jpeg`,
+        link: {
+          mobileWebUrl: shareUrl,
+          webUrl: shareUrl,
+        },
+      },
+      buttons: [
+        {
+          title: '청첩장 보기',
+          link: {
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
+          },
+        },
+      ],
     });
   };
 
