@@ -10,18 +10,30 @@ export default function Location() {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!mapRef.current || !window.naver?.maps) return;
+    const el = mapRef.current;
+    if (!el) return;
 
-    const position = new naver.maps.LatLng(wedding.lat, wedding.lng);
-    const map = new naver.maps.Map(mapRef.current, {
-      center: position,
-      zoom: 16,
-      zoomControl: false,
-      mapDataControl: false,
-      scaleControl: false,
-    });
+    const initMap = () => {
+      const position = new naver.maps.LatLng(wedding.lat, wedding.lng);
+      const map = new naver.maps.Map(el, {
+        center: position,
+        zoom: 16,
+        zoomControl: false,
+        mapDataControl: false,
+        scaleControl: false,
+      });
+      new naver.maps.Marker({ position, map });
+    };
 
-    new naver.maps.Marker({ position, map });
+    if (window.naver?.maps) {
+      initMap();
+    } else {
+      const script = document.querySelector<HTMLScriptElement>(
+        'script[src*="oapi.map.naver.com"]'
+      );
+      script?.addEventListener('load', initMap);
+      return () => script?.removeEventListener('load', initMap);
+    }
   }, [wedding.lat, wedding.lng]);
 
   const openNaverMap = () => {
