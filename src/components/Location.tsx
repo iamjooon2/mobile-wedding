@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { config } from '../config';
@@ -6,6 +7,22 @@ import '../styles/Location.css';
 export default function Location() {
   const { wedding, transport } = config;
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!mapRef.current || !window.naver?.maps) return;
+
+    const position = new naver.maps.LatLng(wedding.lat, wedding.lng);
+    const map = new naver.maps.Map(mapRef.current, {
+      center: position,
+      zoom: 16,
+      zoomControl: false,
+      mapDataControl: false,
+      scaleControl: false,
+    });
+
+    new naver.maps.Marker({ position, map });
+  }, [wedding.lat, wedding.lng]);
 
   const openNaverMap = () => {
     window.open(
@@ -44,9 +61,7 @@ export default function Location() {
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: 0.4, duration: 0.6 }}
       >
-        <div className="location__map-placeholder">
-          <span>MAP</span>
-        </div>
+        <div ref={mapRef} className="location__map-inner" />
       </motion.div>
 
       <motion.div
