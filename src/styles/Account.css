@@ -23,7 +23,7 @@
 
 .account__subtitle {
   font-size: 0.8rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text-light);
   margin-bottom: 40px;
 }
@@ -79,13 +79,13 @@
 
 .account__bank {
   font-size: 0.65rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text-muted);
   letter-spacing: 0.5px;
 }
 
 .account__number {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: var(--color-text);
   letter-spacing: 0.5px;
@@ -93,24 +93,27 @@
 
 .account__holder {
   font-size: 0.7rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text-light);
 }
 
 .account__actions {
   display: flex;
+  flex-direction: row-reverse;
   gap: 8px;
   align-items: center;
 }
 
 .account__copy-btn {
-  padding: 6px 14px;
+  padding: 0 14px;
   border: 1px solid var(--color-border);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
+  height: 32px;
   font-weight: 400;
   letter-spacing: 0.5px;
   color: var(--color-text);
   transition: all 0.3s ease;
+  outline: 0;
 }
 
 .account__copy-btn:hover {
@@ -124,11 +127,14 @@
 }
 
 .account__kakao-btn {
-  display: inline-block;
-  padding: 6px 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 14px;
+  height: 32px;
   background: #fee500;
-  font-size: 0.65rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 400;
   color: #3a1d1d;
   transition: opacity 0.3s ease;
 }
