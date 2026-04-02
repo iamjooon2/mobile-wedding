@@ -30,7 +30,7 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      background: '#000',
+      background: '#333',
       color: '#fff',
       fontFamily: 'var(--font-sans), var(--font-kr)',
       zIndex: 99999,

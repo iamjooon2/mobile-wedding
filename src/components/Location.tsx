@@ -17,10 +17,15 @@ export default function Location() {
       const position = new naver.maps.LatLng(wedding.lat, wedding.lng);
       const map = new naver.maps.Map(el, {
         center: position,
-        zoom: 16,
+        zoom: 17,
         zoomControl: false,
         mapDataControl: false,
         scaleControl: false,
+        draggable: false,
+        pinchZoom: false,
+        scrollWheel: false,
+        disableDoubleTapZoom: true,
+        disableTwoFingerTapZoom: true,
       });
       new naver.maps.Marker({ position, map });
     };
@@ -77,29 +82,24 @@ export default function Location() {
       </motion.div>
 
       <motion.div
+        className="location__transport"
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        <button className="location__btn" onClick={openNaverMap}>
-          네이버 지도에서 보기
-        </button>
+        {transport.map((line, i) => (
+          <li key={i} className="location__transport-line">{line}</li>
+        ))}
       </motion.div>
 
-      <div className="location__rule" />
-
       <motion.div
-        className="location__transport"
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.8, duration: 0.8 }}
       >
-        {transport.map((item, i) => (
-          <div key={i} className="location__transport-item">
-            <span className="location__transport-label">{item.label}</span>
-            <span className="location__transport-desc">{item.description}</span>
-          </div>
-        ))}
+        <button className="location__btn" onClick={openNaverMap}>
+          네이버 지도에서 보기
+        </button>
       </motion.div>
     </section>
   );

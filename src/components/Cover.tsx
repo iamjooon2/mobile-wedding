@@ -13,37 +13,34 @@ export default function Cover() {
     offset: ['start start', 'end end'],
   });
 
-  // 800vh total scroll space
-  // Cover:  0 ~ 0.20
-  // Groom:  0.22 ~ 0.48
-  // Bride:  0.50 ~ 0.78
-  // Exit:   0.78 ~ 0.88
+  // 400vh total scroll space
+  // Cover:  0 ~ 0.25
+  // Groom:  0.25 ~ 0.55
+  // Bride:  0.55 ~ 1.0
 
-  // SVG lines
-  const pathProgress = useTransform(scrollYProgress, [0, 0.18], [0, 1]);
-  const pathOpacity = useTransform(scrollYProgress, [0, 0.02, 0.16, 0.22], [0.5, 1, 1, 0]);
+  // SVG line draws downward, ink drop spreads on impact
+  const lineProgress = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const inkScale = useTransform(scrollYProgress, [0.13, 0.25], [0, 1]);
+  const inkOpacity = useTransform(scrollYProgress, [0.13, 0.17], [0, 1]);
 
-  // Use callback-based useTransform to avoid array-mapping subscription issues
   const coverOpacity = useTransform(scrollYProgress, (p: number) => {
-    if (p <= 0.16) return 1;
-    if (p >= 0.28) return 0;
-    return 1 - (p - 0.16) / 0.12;
+    if (p <= 0.20) return 1;
+    if (p >= 0.30) return 0;
+    return 1 - (p - 0.20) / 0.10;
   });
 
   const groomOpacity = useTransform(scrollYProgress, (p: number) => {
-    if (p <= 0.20) return 0;
-    if (p <= 0.26) return (p - 0.20) / 0.06;
-    if (p <= 0.54) return 1;
-    if (p >= 0.56) return 0;
-    return 1 - (p - 0.54) / 0.02;
+    if (p <= 0.25) return 0;
+    if (p <= 0.32) return (p - 0.25) / 0.07;
+    if (p <= 0.55) return 1;
+    if (p >= 0.62) return 0;
+    return 1 - (p - 0.55) / 0.07;
   });
 
   const brideOpacity = useTransform(scrollYProgress, (p: number) => {
-    if (p <= 0.48) return 0;
-    if (p <= 0.54) return (p - 0.48) / 0.06;
-    if (p <= 0.76) return 1;
-    if (p >= 0.84) return 0;
-    return 1 - (p - 0.76) / 0.08;
+    if (p <= 0.62) return 0;
+    if (p <= 0.69) return (p - 0.62) / 0.07;
+    return 1;
   });
 
   useEffect(() => {
@@ -57,7 +54,7 @@ export default function Cover() {
   return (
     <div className="hero" ref={heroRef}>
       <div className="hero__sticky">
-        {/* SVG background */}
+        {/* SVG background - vertical line + splash particles */}
         <svg
           className="hero__svg"
           viewBox="0 0 200 400"
@@ -66,30 +63,32 @@ export default function Cover() {
           preserveAspectRatio="xMidYMid meet"
         >
           <motion.line
-            x1="100" y1="0" x2="100" y2="50"
-            stroke="rgba(0,0,0,0.35)"
-            strokeWidth="0.7"
-            style={{ opacity: pathOpacity }}
-          />
-          <motion.path
-            d="M100,50 C100,100 45,140 25,200 C5,260 30,320 100,370"
-            stroke="rgba(0,0,0,0.5)"
+            x1="100" y1="0" x2="100" y2="200"
+            stroke="#333"
             strokeWidth="0.8"
-            fill="none"
-            style={{ pathLength: pathProgress, opacity: pathOpacity }}
+            style={{ pathLength: lineProgress }}
           />
-          <motion.path
-            d="M100,50 C100,100 155,140 175,200 C195,260 170,320 100,370"
-            stroke="rgba(0,0,0,0.5)"
-            strokeWidth="0.8"
-            fill="none"
-            style={{ pathLength: pathProgress, opacity: pathOpacity }}
-          />
-          <motion.line
-            x1="100" y1="370" x2="100" y2="400"
-            stroke="rgba(0,0,0,0.35)"
-            strokeWidth="0.7"
-            style={{ opacity: pathProgress }}
+          {/* Ink drop */}
+          <defs>
+            <radialGradient id="inkGrad">
+              <stop offset="0%" stopColor="#3a8b26" stopOpacity="1" />
+              <stop offset="35%" stopColor="#4ca632" stopOpacity="0.6" />
+              <stop offset="70%" stopColor="#6abf4e" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#8fd47a" stopOpacity="0" />
+            </radialGradient>
+            <filter id="inkBlur">
+              <feGaussianBlur stdDeviation="3" />
+            </filter>
+          </defs>
+          <motion.circle
+            cx="100" cy="200" r="80"
+            fill="url(#inkGrad)"
+            filter="url(#inkBlur)"
+            style={{
+              scale: inkScale,
+              opacity: inkOpacity,
+              transformOrigin: '100px 200px',
+            }}
           />
         </svg>
 
@@ -115,7 +114,7 @@ export default function Cover() {
             <p className="hero__profile-label">소개</p>
             <div className="hero__profile-photo">
               {groom.photo ? (
-                <img src={groom.photo} alt={groom.name} />
+                <img src={groom.photo} alt={groom.name} className="hero__profile-photo--groom-zoomed" />
               ) : (
                 <div className="hero__profile-photo-placeholder" />
               )}

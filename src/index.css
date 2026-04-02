@@ -1,10 +1,10 @@
 :root {
   --color-bg: #ffffff;
-  --color-bg-cover: #000000;
-  --color-text: #000000;
+  --color-bg-cover: #333333;
+  --color-text: #333333;
   --color-text-light: #555555;
   --color-text-muted: #999999;
-  --color-border: #000000;
+  --color-border: #e0e0e0;
   --color-border-light: #e0e0e0;
   --font-sans: 'Helvetica Neue', Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-kr: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
