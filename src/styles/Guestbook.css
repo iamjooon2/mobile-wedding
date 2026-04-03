@@ -5,49 +5,277 @@
   background: var(--color-bg);
 }
 
+/* ── 헤더 ── */
+.guestbook__header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.guestbook__leaf {
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 16px;
+  background: radial-gradient(ellipse at 30% 40%, #0F8C38 0%, #0A6B2A 100%);
+  border-radius: 50% 0 50% 0;
+  opacity: 0.7;
+}
+
 .guestbook__title {
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 6px;
   color: var(--color-text);
-  text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 8px;
 }
 
-.guestbook__rule {
+.guestbook__subtitle {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+}
+
+/* ── 작성 버튼 ── */
+.guestbook__write-btn {
+  display: block;
   width: 100%;
+  padding: 14px;
+  border: 1px solid #0A6B2A;
+  color: #0A6B2A;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  transition: all 0.3s ease;
+}
+
+.guestbook__write-btn:active {
+  background: #0A6B2A;
+  color: #fff;
+}
+
+/* ── 카드 쌓임 영역 ── */
+.guestbook__pile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+/* ── 미니 카드 ── */
+.guestbook__mini-card {
+  cursor: pointer;
+}
+
+.guestbook__mini-inner {
+  border-radius: 16px;
+  padding: 20px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.25s ease;
+}
+
+.guestbook__mini-card:active .guestbook__mini-inner {
+  box-shadow:
+    0 2px 6px rgba(10, 107, 42, 0.08),
+    0 8px 24px rgba(10, 107, 42, 0.06);
+}
+
+.guestbook__mini-quote {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #0A6B2A;
+  opacity: 0.25;
+}
+
+.guestbook__mini-preview {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  word-break: keep-all;
+  flex: 1;
+}
+
+.guestbook__mini-from {
+  font-size: 0.62rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  text-align: right;
+  letter-spacing: 0.3px;
+}
+
+/* ── 카드 확대 모달 ── */
+.guestbook__card-modal {
+  background: var(--color-bg);
+  border-radius: 18px;
+  padding: 32px 24px 24px;
+  width: calc(100% - 64px);
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.guestbook__card-modal-accent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0A6B2A, #0F8C38);
+}
+
+.guestbook__card-modal-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.guestbook__card-modal-date {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.guestbook__card-modal-divider {
+  width: 24px;
   height: 1px;
   background: var(--color-border);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
+.guestbook__card-modal-message {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+  line-height: 1.9;
+  text-align: center;
+  word-break: keep-all;
+  margin-bottom: 20px;
+}
+
+.guestbook__card-modal-footer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.guestbook__card-modal-delete,
+.guestbook__card-modal-close {
+  font-size: 0.7rem;
+  font-weight: 400;
+  padding: 6px 16px;
+  border-radius: 20px;
+  transition: opacity 0.2s ease;
+}
+
+.guestbook__card-modal-delete {
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+}
+
+.guestbook__card-modal-close {
+  color: #fff;
+  background: #0A6B2A;
+  border: none;
+}
+
+.guestbook__card-modal-delete:active,
+.guestbook__card-modal-close:active {
+  opacity: 0.6;
+}
+
+/* ── 오버레이 ── */
+.guestbook__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 32px;
+}
+
+/* ── 작성/삭제 모달 ── */
+.guestbook__modal {
+  background: var(--color-bg);
+  border-radius: 18px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.guestbook__modal-accent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0A6B2A, #0F8C38);
+}
+
+.guestbook__modal-title {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-text);
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.guestbook__modal-error {
+  font-size: 0.7rem;
+  color: #c0392b;
+  text-align: center;
+}
+
+/* ── 폼 ── */
 .guestbook__form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 32px;
-}
-
-.guestbook__input-row {
-  display: flex;
-  gap: 8px;
 }
 
 .guestbook__input {
-  flex: 1;
+  width: 100%;
   padding: 12px 16px;
   border: 1px solid var(--color-border-light);
+  border-radius: 10px;
   font-family: inherit;
   font-size: 0.8rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text);
   background: var(--color-bg);
   outline: none;
   transition: border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 .guestbook__input:focus {
-  border-color: var(--color-text);
+  border-color: #0A6B2A;
 }
 
 .guestbook__input::placeholder {
@@ -55,93 +283,73 @@
 }
 
 .guestbook__textarea {
+  width: 100%;
   padding: 12px 16px;
   border: 1px solid var(--color-border-light);
+  border-radius: 10px;
   font-family: inherit;
   font-size: 0.8rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text);
   background: var(--color-bg);
   outline: none;
   resize: none;
-  min-height: 100px;
+  min-height: 120px;
   transition: border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 .guestbook__textarea:focus {
-  border-color: var(--color-text);
+  border-color: #0A6B2A;
 }
 
 .guestbook__textarea::placeholder {
   color: var(--color-text-muted);
 }
 
-.guestbook__submit {
-  align-self: flex-end;
-  padding: 10px 28px;
-  background: var(--color-text);
-  color: var(--color-bg);
+/* ── 개인정보 안내 ── */
+.guestbook__privacy {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ── 모달 버튼 ── */
+.guestbook__form-actions,
+.guestbook__modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.guestbook__modal-btn {
+  flex: 1;
+  padding: 12px;
   font-size: 0.75rem;
   font-weight: 400;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  border-radius: 10px;
   transition: opacity 0.3s ease;
 }
 
-.guestbook__submit:hover {
-  opacity: 0.8;
+.guestbook__modal-btn:active {
+  opacity: 0.7;
 }
 
-.guestbook__messages {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  border-top: 1px solid var(--color-border);
-}
-
-.guestbook__message {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--color-border-light);
-  position: relative;
-}
-
-.guestbook__message-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.guestbook__message-name {
-  font-size: 0.8rem;
-  font-weight: 500;
+.guestbook__modal-btn--cancel {
+  border: 1px solid var(--color-border);
   color: var(--color-text);
+  background: var(--color-bg);
 }
 
-.guestbook__message-date {
-  font-size: 0.65rem;
-  font-weight: 300;
-  color: var(--color-text-muted);
+.guestbook__modal-btn--confirm {
+  background: #0A6B2A;
+  color: #fff;
+  border: none;
 }
 
-.guestbook__message-text {
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: var(--color-text-light);
-  line-height: 1.7;
-  word-break: keep-all;
-}
-
-.guestbook__delete-btn {
-  position: absolute;
-  top: 20px;
-  right: 0;
-  font-size: 0.65rem;
-  color: var(--color-text-muted);
-  padding: 4px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.guestbook__message:hover .guestbook__delete-btn {
-  opacity: 1;
+.guestbook__modal-btn--confirm:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
