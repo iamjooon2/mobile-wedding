@@ -52,7 +52,7 @@ export default function Share() {
       content: {
         title: `${groom.name} & ${bride.name} 결혼합니다`,
         description: `${wedding.dateDisplay}\n${wedding.venue}`,
-        imageUrl: `${shareUrl}thumbnail.webp`,
+        imageUrl: `${shareUrl}thumbnail_test.png`,
         link: {
           mobileWebUrl: shareUrl,
           webUrl: shareUrl,
@@ -114,7 +114,7 @@ export default function Share() {
         {toast && (
           <motion.div
             className="share__toast"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, x}}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
           >
