@@ -55,14 +55,14 @@
 
 .menu__item {
   font-size: 0.75rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text-light);
   line-height: 1.6;
 }
 
 .menu__notice {
   font-size: 0.7rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text-muted);
   letter-spacing: 1px;
 }
