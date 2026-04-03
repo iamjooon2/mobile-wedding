@@ -114,7 +114,7 @@ export default function Share() {
         {toast && (
           <motion.div
             className="share__toast"
-            initial={{ opacity: 0, x}}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
           >
